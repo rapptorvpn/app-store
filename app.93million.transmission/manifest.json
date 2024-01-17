@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "backgroundColor": "#F9EDE3"
+  },
+  "id": "app.93million.transmission",
+  "info": "A Fast, Easy and Free Bittorrent Client",
+  "path": "transmission",
+  "name": "Transmission",
+  "secureWebUrl": "http://app.93million.transmission:9091"
+}

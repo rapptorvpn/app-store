@@ -1,0 +1,25 @@
+version: '3.4'
+
+networks:
+  default:
+    name: punk
+    external: true
+volumes:
+  punk-data:
+    external: true
+services:
+  app.93million.transmission:
+    container_name: app.93million.transmission
+    image: linuxserver/transmission
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./data/etc:/config:rw
+      - punk-data:/files:rw
+    expose:
+      - 9091
+    ports:
+      - 58119:58119

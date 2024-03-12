@@ -6,12 +6,10 @@ networks:
     external: true
 services:
   app.93million.wg-easy:
-    env_file:
-      - ./.env
     environment:
       # ⚠️ Required:
       # Change this to your host's public address
-      # - WG_HOST=${PUNK_DOMAIN}
+      - WG_HOST=${PUNK_BASE_DOMAIN}
       # Optional:
       # - PASSWORD=foobar123
       # - WG_PORT=51820

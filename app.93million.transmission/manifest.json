@@ -1,4 +1,5 @@
 {
+  "compatibility": "0.x",
   "icon": {
     "backgroundColor": "#F9EDE3"
   },

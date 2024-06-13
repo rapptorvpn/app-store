@@ -113,9 +113,22 @@ const plexConfigurers = [
       await setPref('FriendlyName', friendlyName, headers)
     }
   },
+  {
+    test: (prefs, libraryNames) => !!prefs.ManualPortMappingMode,
+    configure: async (headers, searchParams, friendlyName) => {
+      await setPref('ManualPortMappingPort', '32400', headers)
+      await setPref('ManualPortMappingMode', '1', headers)
+    }
+  },
   ...libraries.map((library) => ({
     test: (prefs, libraryNames) => libraryNames.includes(library.name),
-    configure: async (headers, searchParams, friendlyName) => addLibrary(library.type, library.name, ['/files/Downloads', library.location], headers, searchParams)
+    configure: async (headers, searchParams, friendlyName) => addLibrary(
+      library.type,
+      library.name,
+      ['/files/Downloads', library.location],
+      headers,
+      searchParams
+    )
   }))
 ]
 

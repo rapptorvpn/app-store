@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 // import {HttpsProxyAgent} from 'https-proxy-agent'
 
 const plexContainerIpPromise = dns.promises.lookup('app.93million.plex')
-const proxyContainerIpPromise = dns.promises.lookup(process.env.PUNK_CONTROL_PANEL_SERVICE_URL_INTERNAL.replace(/:\d+$/, ''))
+const proxyContainerIpPromise = dns.promises.lookup(process.env.RAPPTOR_CONTROL_PANEL_SERVICE_URL_INTERNAL.replace(/:\d+$/, ''))
 let plexIsConfigured = false
 // const proxyAgent = new HttpsProxyAgent('http://localhost:8888')
 

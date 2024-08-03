@@ -2,10 +2,10 @@ version: '3.4'
 
 networks:
   default:
-    name: punk
+    name: rapptor
     external: true
 volumes:
-  punk-data:
+  rapptor-data:
     external: true
 services:
   app.93million.plex:
@@ -18,7 +18,7 @@ services:
       - VERSION=docker
     volumes:
       - ./data/config:/config:rw
-      - punk-data:/files:rw
+      - rapptor-data:/files:rw
     ports:
       - 32400:32400/tcp
     restart: unless-stopped

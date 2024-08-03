@@ -2,7 +2,7 @@ version: "3.8"
 
 networks:
   default:
-    name: punk
+    name: rapptor
     external: true
 services:
   app.93million.wg-easy:

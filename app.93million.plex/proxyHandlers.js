@@ -120,6 +120,16 @@ const plexConfigurers = [
       await setPref('ManualPortMappingMode', '1', headers)
     }
   },
+  {
+    test: (prefs, libraryNames) => (
+      !!prefs.FSEventLibraryUpdatesEnabled &&
+      !!prefs.FSEventLibraryPartialScanEnabled
+    ),
+    configure: async (headers, searchParams, friendlyName) => {
+      await setPref('FSEventLibraryUpdatesEnabled', '1', headers)
+      await setPref('FSEventLibraryPartialScanEnabled', '1', headers)
+    }
+  },
   ...libraries.map((library) => ({
     test: (prefs, libraryNames) => libraryNames.includes(library.name),
     configure: async (headers, searchParams, friendlyName) => addLibrary(

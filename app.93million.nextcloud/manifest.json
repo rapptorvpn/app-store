@@ -1,0 +1,11 @@
+{
+  "compatibility": "0.x",
+  "icon": {
+    "backgroundColor": "#2B679C"
+  },
+  "id": "app.93million.nextcloud",
+  "info": "Nextcloud is a suite of client-server software for creating and using file hosting services. It can integrate with the Collabora Online and OnlyOffice office suites. It can be hosted in the cloud or on premise and can scale up to millions of users. It is translated to 60 languages.",
+  "path": "nextcloud",
+  "name": "Nextcloud",
+  "secureWebUrl": "http://app.93million.nextcloud:80"
+}

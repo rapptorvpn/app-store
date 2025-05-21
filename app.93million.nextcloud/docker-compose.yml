@@ -1,0 +1,18 @@
+networks:
+  default:
+    name: rapptor
+    external: true
+volumes:
+  rapptor-data:
+    external: true
+services:
+  app.93million.nextcloud:
+    image: nextcloud:31.0.5-apache
+    container_name: app.93million.nextcloud
+    volumes:
+      - ./nextcloud:/var/www/html
+      - rapptor-data:/files:rw
+    environment:
+      NEXTCLOUD_TRUSTED_DOMAINS: "app-93million-nextcloud.${RAPPTOR_BASE_DOMAIN}"
+      OVERWRITEPROTOCOL: https
+    restart: unless-stopped

@@ -22,3 +22,10 @@ services:
     ports:
       - 32400:32400/tcp
     restart: unless-stopped
+    healthcheck:
+      test: curl -f http://localhost:32400/web/index.html || exit 1
+      interval: 60s
+      retries: 3
+      start_interval: 2s
+      start_period: 30s
+      timeout: 10s

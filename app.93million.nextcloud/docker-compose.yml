@@ -16,3 +16,10 @@ services:
       NEXTCLOUD_TRUSTED_DOMAINS: "app-93million-nextcloud.${RAPPTOR_BASE_DOMAIN}"
       OVERWRITEPROTOCOL: https
     restart: unless-stopped
+    healthcheck:
+      test: curl -f http://localhost:80 || exit 1
+      interval: 30s
+      retries: 3
+      start_interval: 2s
+      start_period: 30s
+      timeout: 10s

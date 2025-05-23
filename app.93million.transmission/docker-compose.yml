@@ -23,3 +23,10 @@ services:
       - 9091
     ports:
       - 58119:58119
+    healthcheck:
+      test: curl -f http://localhost:9091 || exit 1
+      interval: 30s
+      retries: 3
+      start_interval: 2s
+      start_period: 30s
+      timeout: 10s

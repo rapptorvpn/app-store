@@ -7,5 +7,49 @@
   "info": "Nextcloud is a suite of client-server software for creating and using file hosting services. It can integrate with the Collabora Online and OnlyOffice office suites. It can be hosted in the cloud or on premise and can scale up to millions of users. It is translated to 60 languages.",
   "path": "nextcloud",
   "name": "Nextcloud",
-  "secureWebUrl": "http://app.93million.nextcloud:80"
+  "secureWebUrl": "http://app.93million.nextcloud:80",
+  "commands": {
+    "addexternalstorage": {
+      "command": "php occ app:install files_external && php occ files_external:create --user admin -- /files/ local",
+      "container": "app.93million.nextcloud"
+    },
+    "setadminpassword": {
+      "command": [
+        "php",
+        "/var/www/html/occ",
+        "user:resetpassword",
+        "--password-from-env",
+        "--no-interaction",
+        "--no-warnings",
+        "--",
+        "admin"
+      ],
+      "container": "app.93million.nextcloud",
+      "env": [["OC_PASS", "${password}"]]
+    }
+  },
+  "events": {
+    "install": ["setadminpassword", "addexternalstorage"]
+  },
+  "settings": [
+    {
+      "command": "setadminpassword",
+      "fields": [
+        {
+          "label": "Admin password",
+          "name": "password",
+          "type": "textfield",
+          "validations": [
+            {
+              "type": "required"
+            },
+            {
+              "length": 10,
+              "type": "minlength"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

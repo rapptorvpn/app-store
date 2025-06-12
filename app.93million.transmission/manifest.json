@@ -7,5 +7,5 @@
   "info": "A Fast, Easy and Free Bittorrent Client",
   "path": "transmission",
   "name": "Transmission",
-  "secureWebUrl": "http://app.93million.transmission:9091"
+  "webViewURL": "http://app.93million.transmission:9091"
 }

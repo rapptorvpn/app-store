@@ -7,5 +7,5 @@
   "info": "WireGuard is a communication protocol and free and open-source software that implements encrypted virtual private networks, and was designed with the goals of ease of use, high speed performance, and low attack surface",
   "path": "wireguard",
   "name": "Wireguard VPN",
-  "secureWebUrl": "http://app.93million.wg-easy:51821"
+  "webViewURL": "http://app.93million.wg-easy:51821"
 }

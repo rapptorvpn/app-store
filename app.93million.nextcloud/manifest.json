@@ -8,6 +8,7 @@
   "path": "nextcloud",
   "name": "Nextcloud",
   "webViewURL": "http://app.93million.nextcloud:80",
+  "webViewURLSkipAuth": true,
   "commands": {
     "addexternalstorage": {
       "command": "php occ app:install files_external && php occ files_external:create --user admin -- /files/ local",

@@ -10,23 +10,10 @@
   "webViewURL": "http://app.93million.nextcloud:80",
   "webViewURLSkipAuth": true,
   "commands": {
-    "addexternalstorage": {
-      "command": [
-        "php",
-        "occ",
-        "app:install",
-        "files_external",
-        "&&",
-        "php",
-        "occ",
-        "files_external:create",
-        "--user",
-        "admin",
-        "--",
-        "/files/",
-        "local"
-      ],
-      "container": "app.93million.nextcloud"
+    "install": {
+      "command": ["/scripts/install.sh"],
+      "container": "app.93million.nextcloud",
+      "user": "www-data"
     },
     "setadminpassword": {
       "command": [
@@ -42,9 +29,6 @@
       "container": "app.93million.nextcloud",
       "env": [["OC_PASS", "${password}"]]
     }
-  },
-  "events": {
-    "install": ["setadminpassword", "addexternalstorage"]
   },
   "settings": [
     {

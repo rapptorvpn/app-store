@@ -5,13 +5,14 @@ networks:
 volumes:
   rapptor-data:
     external: true
+  nextcloud:
 services:
   app.93million.nextcloud:
     image: nextcloud:31.0.5-apache
     container_name: app.93million.nextcloud
     volumes:
       - rapptor-data:/files:rw
-      - ./nextcloud:/var/www/html:rw
+      - nextcloud:/var/www/html:rw
       - ./scripts:/scripts:ro
     environment:
       NEXTCLOUD_ADMIN_USER: 'admin'
@@ -31,7 +32,7 @@ services:
     image: nextcloud:31.0.5-apache
     container_name: app.93million.nextcloud.cron
     volumes:
-      - ./nextcloud:/var/www/html
+      - nextcloud:/var/www/html:rw
       - rapptor-data:/files:rw
     environment:
       NEXTCLOUD_TRUSTED_DOMAINS: "app-93million-nextcloud.${RAPPTOR_BASE_DOMAIN}"

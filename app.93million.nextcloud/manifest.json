@@ -10,8 +10,8 @@
   "webViewURL": "http://app.93million.nextcloud:80",
   "webViewURLSkipAuth": true,
   "commands": {
-    "install": {
-      "command": ["/scripts/install.sh"],
+    "onAfterStart": {
+      "command": ["/scripts/configure.sh"],
       "container": "app.93million.nextcloud",
       "user": "www-data"
     },
@@ -37,7 +37,7 @@
         {
           "label": "Admin password",
           "name": "password",
-          "type": "textfield",
+          "type": "password",
           "validations": [
             {
               "type": "required"

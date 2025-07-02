@@ -27,7 +27,7 @@
         "admin"
       ],
       "container": "app.93million.nextcloud",
-      "env": [["OC_PASS", "${password}"]]
+      "env": [["OC_PASS", "#{password}"]]
     }
   },
   "settings": [

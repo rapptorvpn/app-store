@@ -15,7 +15,7 @@ services:
       - ./scripts:/scripts:ro
     environment:
       NEXTCLOUD_ADMIN_USER: 'admin'
-      NEXTCLOUD_ADMIN_PASSWORD: 'qwer1234'
+      NEXTCLOUD_ADMIN_PASSWORD: '#{randomStr(42)}'
       SQLITE_DATABASE: 'sqlite'
       NEXTCLOUD_TRUSTED_DOMAINS: "app-93million-nextcloud.${RAPPTOR_BASE_DOMAIN}"
       OVERWRITEPROTOCOL: https

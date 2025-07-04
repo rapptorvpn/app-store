@@ -1,0 +1,43 @@
+networks:
+  default:
+    name: rapptor
+    external: true
+volumes:
+  rapptor-data:
+    external: true
+  owncloud:
+services:
+  app.93million.owncloud:
+    image: owncloud/server:10.15.3
+    container_name: app.93million.owncloud
+    volumes:
+      - rapptor-data:/files:rw
+      - owncloud:/var/www/html:rw
+      - ./scripts:/scripts:ro
+    environment:
+      OWNCLOUD_DOMAIN: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
+      OWNCLOUD_ADMIN_USER: 'admin'
+      OWNCLOUD_ADMIN_PASSWORD: '#{randomStr(42)}'
+      OWNCLOUD_DB_TYPE: sqlite
+      OWNCLOUD_DB_NAME: owncloud
+      OWNCLOUD_TRUSTED_DOMAINS: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
+      OVERWRITEPROTOCOL: https
+    restart: unless-stopped
+    healthcheck:
+      test: curl -f http://localhost:8080/ || exit 1
+      interval: 30s
+      retries: 3
+      start_interval: 2s
+      start_period: 30s
+      timeout: 10s
+  # app.93million.owncloud.cron:
+  #   image: owncloud/server:10.15.3
+  #   container_name: app.93million.owncloud.cron
+  #   volumes:
+  #     - owncloud:/var/www/html:rw
+  #     - rapptor-data:/files:rw
+  #   environment:
+  #     OWNCLOUD_TRUSTED_DOMAINS: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
+  #     OVERWRITEPROTOCOL: https
+  #   restart: unless-stopped
+  #   entrypoint: /cron.sh

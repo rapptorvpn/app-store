@@ -1,0 +1,53 @@
+{
+  "compatibility": "0.x",
+  "icon": {
+    "backgroundColor": "#0A1D40"
+  },
+  "id": "app.93million.owncloud",
+  "info": "ownCloud is an open-source file sync, share and content collaboration software that lets teams work on data easily from anywhere, on any device",
+  "path": "owncloud",
+  "name": "Owncloud",
+  "webViewURL": "http://app.93million.owncloud:8080/",
+  "webViewURLSkipAuth": true,
+  "commands": {
+    "onAfterStart": {
+      "command": ["/scripts/configure.sh"],
+      "container": "app.93million.owncloud",
+      "user": "www-data"
+    },
+    "setadminpassword": {
+      "command": [
+        "occ",
+        "user:resetpassword",
+        "--password-from-env",
+        "--no-interaction",
+        "--no-warnings",
+        "--",
+        "admin"
+      ],
+      "container": "app.93million.owncloud",
+      "env": [["OC_PASS", "#{password}"]]
+    }
+  },
+  "settings": [
+    {
+      "command": "setadminpassword",
+      "fields": [
+        {
+          "label": "Admin password",
+          "name": "password",
+          "type": "password",
+          "validations": [
+            {
+              "type": "required"
+            },
+            {
+              "length": 10,
+              "type": "minlength"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

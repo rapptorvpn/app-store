@@ -8,7 +8,9 @@ volumes:
   nextcloud:
 services:
   app.93million.nextcloud:
-    image: nextcloud:31.0.5-apache
+    build:
+      context: ./
+      dockerfile: Dockerfile
     container_name: app.93million.nextcloud
     volumes:
       - rapptor-data:/files:rw

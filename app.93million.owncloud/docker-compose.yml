@@ -30,14 +30,3 @@ services:
       start_interval: 2s
       start_period: 30s
       timeout: 10s
-  # app.93million.owncloud.cron:
-  #   image: owncloud/server:10.15.3
-  #   container_name: app.93million.owncloud.cron
-  #   volumes:
-  #     - owncloud:/var/www/html:rw
-  #     - rapptor-data:/files:rw
-  #   environment:
-  #     OWNCLOUD_TRUSTED_DOMAINS: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
-  #     OVERWRITEPROTOCOL: https
-  #   restart: unless-stopped
-  #   entrypoint: /cron.sh

@@ -26,6 +26,6 @@ services:
       test: wget --spider http://127.0.0.1:51821/ || exit 1
       interval: 30s
       retries: 3
-      start_interval: 2s
+      start_interval: 1s
       start_period: 30s
       timeout: 10s

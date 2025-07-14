@@ -3,7 +3,7 @@ networks:
     name: rapptor
     external: true
 volumes:
-  rapptor-data:
+  rapptor-user-data:
     external: true
   owncloud:
 services:
@@ -11,7 +11,7 @@ services:
     image: owncloud/server:10.15.3
     container_name: app.93million.owncloud
     volumes:
-      - rapptor-data:/files:rw
+      - rapptor-user-data:/files:rw
       - owncloud:/var/www/html:rw
       - ./scripts:/scripts:ro
     environment:

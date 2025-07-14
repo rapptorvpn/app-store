@@ -3,7 +3,7 @@ networks:
     name: rapptor
     external: true
 volumes:
-  rapptor-data:
+  rapptor-user-data:
     external: true
   nextcloud:
 services:
@@ -13,7 +13,7 @@ services:
       dockerfile: Dockerfile
     container_name: app.93million.nextcloud
     volumes:
-      - rapptor-data:/files:rw
+      - rapptor-user-data:/files:rw
       - nextcloud:/var/www/html:rw
       - ./scripts:/scripts:ro
     environment:
@@ -35,7 +35,7 @@ services:
     container_name: app.93million.nextcloud.cron
     volumes:
       - nextcloud:/var/www/html:rw
-      - rapptor-data:/files:rw
+      - rapptor-user-data:/files:rw
     environment:
       NEXTCLOUD_TRUSTED_DOMAINS: "app-93million-nextcloud.${RAPPTOR_BASE_DOMAIN}"
       OVERWRITEPROTOCOL: https

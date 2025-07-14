@@ -3,7 +3,7 @@ networks:
     name: rapptor
     external: true
 volumes:
-  rapptor-data:
+  rapptor-user-data:
     external: true
 services:
   app.93million.plex:
@@ -16,7 +16,7 @@ services:
       - VERSION=docker
     volumes:
       - ./data/config:/config:rw
-      - rapptor-data:/files:rw
+      - rapptor-user-data:/files:rw
     ports:
       - 32400:32400/tcp
     restart: unless-stopped

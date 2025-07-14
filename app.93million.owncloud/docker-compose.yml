@@ -5,14 +5,18 @@ networks:
 volumes:
   rapptor-user-data:
     external: true
-  owncloud:
+  owncloud-www:
+  owncloud-data:
 services:
   app.93million.owncloud:
-    image: owncloud/server:10.15.3
+    build:
+      context: ./
+      dockerfile: Dockerfile
     container_name: app.93million.owncloud
     volumes:
       - rapptor-user-data:/files:rw
-      - owncloud:/var/www/html:rw
+      - owncloud-www:/var/www/owncloud:rw
+      - owncloud-data:/mnt/data:rw
       - ./scripts:/scripts:ro
     environment:
       OWNCLOUD_DOMAIN: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"

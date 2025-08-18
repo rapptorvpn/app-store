@@ -1,0 +1,17 @@
+{
+  "compatibility": "0.x",
+  "icon": {
+    "backgroundColor": "#000000"
+  },
+  "id": "app.93million.jellyfin",
+  "info": "Nextcloud is a suite of client-server software for creating and using file hosting services. It can integrate with the Collabora Online and OnlyOffice office suites. It can be hosted in the cloud or on premise and can scale up to millions of users. It is translated to 60 languages.",
+  "path": "jellyfin",
+  "name": "Jellyfin",
+  "webViewURL": "http://app.93million.jellyfin:8096",
+  "commands": {
+    "onAfterStart": {
+      "command": ["/scripts/configure.sh", "#{env(RAPPTOR_INSTANCE_NAME)}"],
+      "container": "app.93million.jellyfin"
+    }
+  }
+}

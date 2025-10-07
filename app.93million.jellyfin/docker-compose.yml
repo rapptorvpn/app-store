@@ -40,3 +40,4 @@ services:
       - rapptor-tls-certs:/etc/ssl/rapptor:ro
     ports:
       - 8920:8920
+    restart: unless-stopped

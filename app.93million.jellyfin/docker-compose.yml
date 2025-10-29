@@ -13,7 +13,7 @@ volumes:
 
 services:
   app.93million.jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:10.10.7
     container_name: app.93million.jellyfin
     user: 1000:1000
     volumes:

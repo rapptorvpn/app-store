@@ -2,12 +2,16 @@
 
 set -e
 
-
+INSTANCE_NAME="$1"
 VIRTUAL_FOLDERS_RESPONSE=$(curl -s 'http://localhost:8096/Library/VirtualFolders' \
   -H 'accept: application/json'
 )
 
 if ! echo "$VIRTUAL_FOLDERS_RESPONSE" | grep '{"Path":"/files/Downloads"}' > /dev/null; then
+  curl 'http://localhost:8096/Startup/Configuration' \
+  -H 'Content-Type: application/json' \
+  --data-raw "{\"ServerName\":\"$INSTANCE_NAME\",\"UICulture\":\"en-US\",\"MetadataCountryCode\":\"US\",\"PreferredMetadataLanguage\":\"en\"}"
+
   curl -s 'http://localhost:8096/Library/VirtualFolders?collectionType=movies&refreshLibrary=false&name=Movies' \
     -H 'Content-Type: application/json' \
     --data-raw '{"LibraryOptions":{"Enabled":true,"EnableArchiveMediaFiles":false,"EnablePhotos":true,"EnableRealtimeMonitor":true,"EnableLUFSScan":true,"ExtractTrickplayImagesDuringLibraryScan":false,"SaveTrickplayWithMedia":false,"EnableTrickplayImageExtraction":false,"ExtractChapterImagesDuringLibraryScan":false,"EnableChapterImageExtraction":false,"EnableInternetProviders":true,"SaveLocalMetadata":false,"EnableAutomaticSeriesGrouping":false,"PreferredMetadataLanguage":"","MetadataCountryCode":"","SeasonZeroDisplayName":"Specials","AutomaticRefreshIntervalDays":0,"EnableEmbeddedTitles":false,"EnableEmbeddedExtrasTitles":false,"EnableEmbeddedEpisodeInfos":false,"AllowEmbeddedSubtitles":"AllowAll","SkipSubtitlesIfEmbeddedSubtitlesPresent":false,"SkipSubtitlesIfAudioTrackMatches":false,"SaveSubtitlesWithMedia":true,"SaveLyricsWithMedia":false,"RequirePerfectSubtitleMatch":true,"AutomaticallyAddToCollection":false,"PreferNonstandardArtistsTag":false,"UseCustomTagDelimiters":false,"MetadataSavers":[],"TypeOptions":[{"Type":"Movie","MetadataFetchers":["TheMovieDb","The Open Movie Database"],"MetadataFetcherOrder":["TheMovieDb","The Open Movie Database"],"ImageFetchers":["TheMovieDb","The Open Movie Database","Embedded Image Extractor","Screen Grabber"],"ImageFetcherOrder":["TheMovieDb","The Open Movie Database","Embedded Image Extractor","Screen Grabber"]}],"LocalMetadataReaderOrder":["Nfo"],"SubtitleDownloadLanguages":[],"CustomTagDelimiters":["/","|",";","\\"],"DelimiterWhitelist":[],"DisabledSubtitleFetchers":[],"SubtitleFetcherOrder":[],"DisabledLyricFetchers":[],"LyricFetcherOrder":[],"PathInfos":[{"Path":"/files/Movies"},{"Path":"/files/Downloads"}]}}'

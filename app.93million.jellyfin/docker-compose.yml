@@ -32,7 +32,7 @@ services:
       retries: 3
       start_interval: 1s
       start_period: 30s
-      test: "( curl --noproxy 'localhost' -Lk -fsS 'http://localhost:8096/health' && curl --noproxy 'localhost' -Lk -fsS 'http://localhost:8096/Startup/Configuration' )  || exit 1"
+      test: "( curl --noproxy 'localhost' -Lk -fsS 'http://localhost:8096/health' && (test $(curl -s -o /dev/null -w '%{http_code}' 'http://localhost:8096/Startup/Configuration') -eq 401 || test $(curl -s -o /dev/null -w '%{http_code}' 'http://localhost:8096/Startup/Configuration') -eq 200) ) || exit 1"
   app.93million.jellyfin.nginx:
     image: nginx
     container_name: app.93million.jellyfin.nginx

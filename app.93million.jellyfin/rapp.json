@@ -1,5 +1,5 @@
 {
-  "compatibility": "0.x",
+  "compatibility": ">=0.2",
   "icon": {
     "backgroundColor": "#000000"
   },

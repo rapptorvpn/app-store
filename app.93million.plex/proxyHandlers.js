@@ -1,5 +1,6 @@
 import dns from 'node:dns'
 import fetch from 'node-fetch'
+import { debounce } from '@93m/common'
 // import {HttpsProxyAgent} from 'https-proxy-agent'
 
 const plexContainerIpPromise = dns.promises.lookup('app.93million.plex')
@@ -80,20 +81,6 @@ const getLibraries = async (headers, searchParams) => {
   const response = await fetch(`http://app.93million.plex:32400/library/sections?${searchParams}`, { headers: {...headers, accept: 'application/json'}, method: 'GET' })
   const jsonBody = await response.text()
   return JSON.parse(jsonBody)
-}
-
-let debounceFnRunning = false
-const debounceFn = (fn, timeout = 0) => async (...args) => {
-  if (debounceFnRunning) {
-    return
-  }
-
-  debounceFnRunning = true
-
-  await fn(...args)
-  await new Promise(res => setTimeout(res, timeout))
-
-  debounceFnRunning = false
 }
 
 const libraries = [
@@ -181,6 +168,8 @@ const configurePlex = async (headers, searchParams, friendlyName) => {
   }
 }
 
+const configurePlexDebounced = debounce(configurePlex, 2000)
+
 export const onProxyRequest = async (req, res) => {
   const url = new URL(`http://${req.headers.host}${req.url}`)
   const proxyContainerIp = (await proxyContainerIpPromise).address
@@ -193,7 +182,7 @@ export const onProxyRequest = async (req, res) => {
   const headers = { ...req.headers, ...additionalHeaders }
 
   if (!plexIsConfigured && url.searchParams.get('X-Plex-Session-Id')) {
-    debounceFn(configurePlex, 2000)(headers, url.searchParams, getFriendlyNameFromHost(req.headers.host))
+    configurePlexDebounced(headers, url.searchParams, getFriendlyNameFromHost(req.headers.host))
   }
 
   return { headers }

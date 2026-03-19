@@ -8,7 +8,7 @@ volumes:
   nextcloud:
 services:
   app.93million.nextcloud:
-    image: ghcr.io/93million/rapptor.app.93million.nextcloud:31.0.5
+    image: ghcr.io/93million/rapptor.app.93million.nextcloud:31.0.14
     container_name: app.93million.nextcloud
     volumes:
       - rapptor-user-data:/files:rw
@@ -28,7 +28,7 @@ services:
       start_period: 30s
       timeout: 10s
   app.93million.nextcloud.cron:
-    image: ghcr.io/93million/rapptor.app.93million.nextcloud:31.0.5
+    image: ghcr.io/93million/rapptor.app.93million.nextcloud:31.0.14
     container_name: app.93million.nextcloud.cron
     volumes:
       - nextcloud:/var/www/html:rw

@@ -9,15 +9,12 @@ volumes:
   owncloud-data:
 services:
   app.93million.owncloud:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: ghcr.io/93million/rapptor.app.93million.owncloud:10.16.1
     container_name: app.93million.owncloud
     volumes:
       - rapptor-user-data:/files:rw
       - owncloud-www:/var/www/owncloud:rw
       - owncloud-data:/mnt/data:rw
-      - ./scripts:/scripts:ro
     environment:
       OWNCLOUD_DOMAIN: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
       OWNCLOUD_ADMIN_USER: 'admin'

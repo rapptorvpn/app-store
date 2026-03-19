@@ -8,14 +8,11 @@ volumes:
   nextcloud:
 services:
   app.93million.nextcloud:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: ghcr.io/93million/rapptor.app.93million.nextcloud:31.0.5
     container_name: app.93million.nextcloud
     volumes:
       - rapptor-user-data:/files:rw
       - nextcloud:/var/www/html:rw
-      - ./scripts:/scripts:ro
     environment:
       NEXTCLOUD_ADMIN_USER: 'admin'
       NEXTCLOUD_ADMIN_PASSWORD: '#{randomStr(42)}'
@@ -31,7 +28,7 @@ services:
       start_period: 30s
       timeout: 10s
   app.93million.nextcloud.cron:
-    image: nextcloud:31.0.5-apache
+    image: ghcr.io/93million/rapptor.app.93million.nextcloud:31.0.5
     container_name: app.93million.nextcloud.cron
     volumes:
       - nextcloud:/var/www/html:rw

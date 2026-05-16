@@ -6,8 +6,8 @@ volumes:
   rapptor-user-data:
     external: true
 services:
-  app.93million.transmission:
-    container_name: app.93million.transmission
+  app.rapptor.transmission:
+    container_name: app.rapptor.transmission
     image: linuxserver/transmission:latest
     restart: unless-stopped
     environment:
@@ -28,3 +28,5 @@ services:
       start_interval: 1s
       start_period: 30s
       timeout: 10s
+    logging:
+      driver: none

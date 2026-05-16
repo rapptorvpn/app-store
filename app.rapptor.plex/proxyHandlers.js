@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 import { debounce } from '@93m/common'
 // import {HttpsProxyAgent} from 'https-proxy-agent'
 
-const plexContainerIpPromise = dns.promises.lookup('app.93million.plex')
+const plexContainerIpPromise = dns.promises.lookup('app.rapptor.plex')
 const proxyContainerIpPromise = dns.promises.lookup(process.env.RAPPTOR_CONTROL_PANEL_SERVICE_URL_INTERNAL.replace(/:\d+$/, ''))
 let plexIsConfigured = false
 // const proxyAgent = new HttpsProxyAgent('http://localhost:8888')
@@ -15,7 +15,7 @@ const settingValueGetters = {
 
 const getPrefs = async (headers, searchParams) => {
   const response = await fetch(
-    'http://app.93million.plex:32400/:/prefs?' + searchParams.toString(),
+    'http://app.rapptor.plex:32400/:/prefs?' + searchParams.toString(),
     {
       // agent: proxyAgent,
       headers: { ...headers, accept: 'application/json' }
@@ -36,7 +36,7 @@ const getPrefs = async (headers, searchParams) => {
 }
 
 const setPref = async (name, value, headers) => {
-  const response = await fetch(`http://app.93million.plex:32400/:/prefs?${name}=${value}`, { headers, method: 'PUT' })
+  const response = await fetch(`http://app.rapptor.plex:32400/:/prefs?${name}=${value}`, { headers, method: 'PUT' })
 }
 
 const additionalSearchParams = {
@@ -71,14 +71,14 @@ const addLibrary = async (type, name, locations, headers, searchParams) => {
   locations.forEach(location => librarySearchParams.append('location', location))
   Object.keys(additionalSearchParams[type]).forEach((name) => librarySearchParams.append(name, additionalSearchParams[type][name]))
   librarySearchParams.append('name', name)
-  const response = await fetch(`http://app.93million.plex:32400/library/sections?${librarySearchParams}`, { headers, method: 'POST' })
+  const response = await fetch(`http://app.rapptor.plex:32400/library/sections?${librarySearchParams}`, { headers, method: 'POST' })
   if (response.status < 200 || response.status > 299) {
     throw new Error("Unable to add library")
   }
 }
 
 const getLibraries = async (headers, searchParams) => {
-  const response = await fetch(`http://app.93million.plex:32400/library/sections?${searchParams}`, { headers: {...headers, accept: 'application/json'}, method: 'GET' })
+  const response = await fetch(`http://app.rapptor.plex:32400/library/sections?${searchParams}`, { headers: {...headers, accept: 'application/json'}, method: 'GET' })
   const jsonBody = await response.text()
   return JSON.parse(jsonBody)
 }

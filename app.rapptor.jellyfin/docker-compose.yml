@@ -12,9 +12,9 @@ volumes:
   jellyfinconfig:
 
 services:
-  app.93million.jellyfin:
+  app.rapptor.jellyfin:
     image: jellyfin/jellyfin:10.11.1
-    container_name: app.93million.jellyfin
+    container_name: app.rapptor.jellyfin
     user: 1000:1000
     volumes:
       - jellyfinconfig:/config
@@ -23,7 +23,7 @@ services:
       - ./scripts:/scripts:ro
     restart: unless-stopped
     environment:
-      JELLYFIN_PublishedServerUrl: "https://app-93million-jellyfin.${RAPPTOR_BASE_DOMAIN}"
+      JELLYFIN_PublishedServerUrl: "https://app-rapptor-jellyfin.${RAPPTOR_BASE_DOMAIN}"
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
@@ -33,9 +33,9 @@ services:
       start_interval: 1s
       start_period: 30s
       test: "( curl --noproxy 'localhost' -Lk -fsS 'http://localhost:8096/health' && (test $(curl -s -o /dev/null -w '%{http_code}' 'http://localhost:8096/Startup/Configuration') -eq 401 || test $(curl -s -o /dev/null -w '%{http_code}' 'http://localhost:8096/Startup/Configuration') -eq 200) ) || exit 1"
-  app.93million.jellyfin.nginx:
+  app.rapptor.jellyfin.nginx:
     image: nginx
-    container_name: app.93million.jellyfin.nginx
+    container_name: app.rapptor.jellyfin.nginx
     volumes:
       - ./nginx:/etc/nginx/conf.d:ro
       - rapptor-tls-certs:/etc/ssl/rapptor:ro

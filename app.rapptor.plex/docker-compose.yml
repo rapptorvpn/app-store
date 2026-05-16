@@ -6,9 +6,9 @@ volumes:
   rapptor-user-data:
     external: true
 services:
-  app.93million.plex:
+  app.rapptor.plex:
     image: lscr.io/linuxserver/plex:1.41.9
-    container_name: app.93million.plex
+    container_name: app.rapptor.plex
     environment:
       - PUID=1000
       - PGID=1000
@@ -27,3 +27,5 @@ services:
       start_interval: 1s
       start_period: 30s
       timeout: 10s
+    logging:
+      driver: none

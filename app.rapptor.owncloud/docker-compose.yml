@@ -8,19 +8,19 @@ volumes:
   owncloud-www:
   owncloud-data:
 services:
-  app.93million.owncloud:
-    image: ghcr.io/93million/rapptor.app.93million.owncloud:10.16.1
-    container_name: app.93million.owncloud
+  app.rapptor.owncloud:
+    image: ghcr.io/rapptorvpn/app.rapptor.owncloud:10.16.1
+    container_name: app.rapptor.owncloud
     volumes:
       - rapptor-user-data:/files:rw
       - owncloud-data:/mnt/data:rw
     environment:
-      OWNCLOUD_DOMAIN: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
+      OWNCLOUD_DOMAIN: "app-rapptor-owncloud.${RAPPTOR_BASE_DOMAIN}"
       OWNCLOUD_ADMIN_USER: 'admin'
       OWNCLOUD_ADMIN_PASSWORD: '#{randomStr(42)}'
       OWNCLOUD_DB_TYPE: sqlite
       OWNCLOUD_DB_NAME: owncloud
-      OWNCLOUD_TRUSTED_DOMAINS: "app-93million-owncloud.${RAPPTOR_BASE_DOMAIN}"
+      OWNCLOUD_TRUSTED_DOMAINS: "app-rapptor-owncloud.${RAPPTOR_BASE_DOMAIN}"
       OVERWRITEPROTOCOL: https
     restart: unless-stopped
     healthcheck:
@@ -30,3 +30,5 @@ services:
       start_interval: 1s
       start_period: 120s
       timeout: 10s
+    logging:
+      driver: none

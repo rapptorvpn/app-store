@@ -1,23 +1,24 @@
 {
   "compatibility": "0.x",
   "icon": {
-    "backgroundColor": "#0A1D40"
+    "backgroundColor": "#2B679C"
   },
-  "id": "app.93million.owncloud",
-  "info": "ownCloud is an open-source file sync, share and content collaboration software that lets teams work on data easily from anywhere, on any device",
-  "path": "owncloud",
-  "name": "Owncloud",
-  "webViewURL": "http://app.93million.owncloud:8080/",
+  "id": "app.rapptor.nextcloud",
+  "info": "Nextcloud is a suite of client-server software for creating and using file hosting services. It can integrate with the Collabora Online and OnlyOffice office suites. It can be hosted in the cloud or on premise and can scale up to millions of users. It is translated to 60 languages.",
+  "path": "nextcloud",
+  "name": "Nextcloud",
+  "webViewURL": "http://app.rapptor.nextcloud:80",
   "webViewURLSkipAuth": true,
   "commands": {
     "onAfterStart": {
       "command": ["/scripts/configure.sh"],
-      "container": "app.93million.owncloud",
+      "container": "app.rapptor.nextcloud",
       "user": "www-data"
     },
     "setadminpassword": {
       "command": [
-        "occ",
+        "php",
+        "/var/www/html/occ",
         "user:resetpassword",
         "--password-from-env",
         "--no-interaction",
@@ -25,7 +26,7 @@
         "--",
         "admin"
       ],
-      "container": "app.93million.owncloud",
+      "container": "app.rapptor.nextcloud",
       "env": [["OC_PASS", "#{password}"]]
     }
   },

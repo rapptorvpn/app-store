@@ -3,9 +3,9 @@
   "icon": {
     "backgroundColor": "#282A2D"
   },
-  "id": "app.93million.plex",
+  "id": "app.rapptor.plex",
   "info": "Plex is a one stop destination to stream movies, tv shows, sports & music. Check good movies to watch on Plex and stream all your personal media libraries on every device.",
   "path": "plex",
   "name": "Plex",
-  "webViewURL": "http://app.93million.plex:32400/web/index.html"
+  "webViewURL": "http://app.rapptor.plex:32400/web/index.html"
 }

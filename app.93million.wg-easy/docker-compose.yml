@@ -3,14 +3,14 @@ networks:
     name: rapptor
     external: true
 services:
-  app.93million.wg-easy:
+  app.rapptor.wg-easy:
     environment:
       - WG_HOST=${RAPPTOR_BASE_DOMAIN}
       - WG_DEFAULT_ADDRESS=10.8.0.x
       - WG_DEFAULT_DNS=8.8.4.4
       - WG_MTU=1280
     image: ghcr.io/wg-easy/wg-easy:latest
-    container_name: app.93million.wg-easy
+    container_name: app.rapptor.wg-easy
     volumes:
       - ./data/etc:/etc/wireguard
     ports:

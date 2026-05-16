@@ -3,16 +3,16 @@
   "icon": {
     "backgroundColor": "#0A1D40"
   },
-  "id": "app.93million.owncloud",
+  "id": "app.rapptor.owncloud",
   "info": "ownCloud is an open-source file sync, share and content collaboration software that lets teams work on data easily from anywhere, on any device",
   "path": "owncloud",
   "name": "Owncloud",
-  "webViewURL": "http://app.93million.owncloud:8080/",
+  "webViewURL": "http://app.rapptor.owncloud:8080/",
   "webViewURLSkipAuth": true,
   "commands": {
     "onAfterStart": {
       "command": ["/scripts/configure.sh"],
-      "container": "app.93million.owncloud",
+      "container": "app.rapptor.owncloud",
       "user": "www-data"
     },
     "setadminpassword": {
@@ -25,7 +25,7 @@
         "--",
         "admin"
       ],
-      "container": "app.93million.owncloud",
+      "container": "app.rapptor.owncloud",
       "env": [["OC_PASS", "#{password}"]]
     }
   },

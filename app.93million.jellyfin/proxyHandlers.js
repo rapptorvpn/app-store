@@ -3,13 +3,13 @@ import chokidar from 'chokidar'
 import debug from 'debug'
 import fs from 'node:fs/promises'
 
-const logger = debug("rapptor:app.93million.jellyfin:proxyHandlers");
+const logger = debug("rapptor:app.rapptor.jellyfin:proxyHandlers");
 
 const internalAPIKeyName = 'RapptorInternal'
 
 const getAuthHeaderFromKey = (apiKey) => {
   return [
-    'MediaBrowser Client="Rapptor App app.93million.jellyfin"',
+    'MediaBrowser Client="Rapptor App app.rapptor.jellyfin"',
     'Device="Rapptor"',
     'Version="10.11.1"',
     `Token="${apiKey}"`
@@ -19,7 +19,7 @@ const getAuthHeaderFromKey = (apiKey) => {
 const getApiKeys = async (apiKey) => {
   const authorization = getAuthHeaderFromKey(apiKey)
   const request = await fetch(
-    'http://app.93million.jellyfin:8096/Auth/Keys',
+    'http://app.rapptor.jellyfin:8096/Auth/Keys',
     { headers: { authorization } }
   )
 
@@ -35,7 +35,7 @@ const getApiKeys = async (apiKey) => {
 const getVirtualFolders = async (apiKey) => {
   const authorization = getAuthHeaderFromKey(apiKey)
   const request = await fetch(
-    'http://app.93million.jellyfin:8096/Library/VirtualFolders',
+    'http://app.rapptor.jellyfin:8096/Library/VirtualFolders',
     { headers: { authorization } }
   )
 
@@ -47,7 +47,7 @@ const getVirtualFolders = async (apiKey) => {
 const createInternalAPIKey = async (apiKey) => {
   const authorization = getAuthHeaderFromKey(apiKey)
   const response = await fetch(
-    `http://app.93million.jellyfin:8096/Auth/Keys?App=${internalAPIKeyName}`,
+    `http://app.rapptor.jellyfin:8096/Auth/Keys?App=${internalAPIKeyName}`,
     { headers: { authorization }, method: 'POST' }
   )
 
@@ -82,7 +82,7 @@ const getOrCreateInternalAPIKey = async (apiKey) => {
 const getScheduledTasks = async (apiKey) => {
   const authorization = getAuthHeaderFromKey(apiKey)
   const request = await fetch(
-    'http://app.93million.jellyfin:8096/ScheduledTasks?isHidden=false',
+    'http://app.rapptor.jellyfin:8096/ScheduledTasks?isHidden=false',
     { headers: { authorization } }
   )
 
@@ -104,7 +104,7 @@ const refreshLibrary = async (apiKey) => {
 
   const authorization = getAuthHeaderFromKey(apiKey)
   await fetch(
-    `http://app.93million.jellyfin:8096/ScheduledTasks/Running/${refreshLibraryTask.Id}`,
+    `http://app.rapptor.jellyfin:8096/ScheduledTasks/Running/${refreshLibraryTask.Id}`,
     { headers: { authorization }, method: 'POST' }
   )
 
@@ -116,15 +116,15 @@ let jellyFinConfigured = false
 const appDataKey = 'apiKey'
 
 const getApiKeyFromAppData = async () => {
-  return getAppData('app.93million.jellyfin', appDataKey)
+  return getAppData('app.rapptor.jellyfin', appDataKey)
 }
 
 const writeApiKeyToAppData = async (apiKey) => {
-  return setAppData('app.93million.jellyfin', appDataKey, apiKey)
+  return setAppData('app.rapptor.jellyfin', appDataKey, apiKey)
 }
 
 const scanVirtualFolder = async (apiKey, virtualFolderId) => {
-  const url = `http://app.93million.jellyfin:8096/Items/${virtualFolderId}/Refresh?Recursive=true&ImageRefreshMode=Default&MetadataRefreshMode=Default&ReplaceAllImages=false&RegenerateTrickplay=false&ReplaceAllMetadata=false`
+  const url = `http://app.rapptor.jellyfin:8096/Items/${virtualFolderId}/Refresh?Recursive=true&ImageRefreshMode=Default&MetadataRefreshMode=Default&ReplaceAllImages=false&RegenerateTrickplay=false&ReplaceAllMetadata=false`
   const authorization = getAuthHeaderFromKey(apiKey)
   const response = await fetch(url, { headers: { authorization }, method: 'POST' })
   const response2 = await fetch(url, { headers: { authorization }, method: 'POST' })

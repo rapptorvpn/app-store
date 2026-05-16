@@ -3,9 +3,9 @@
   "icon": {
     "backgroundColor": "#F9EDE3"
   },
-  "id": "app.93million.transmission",
+  "id": "app.rapptor.transmission",
   "info": "A Fast, Easy and Free Bittorrent Client",
   "path": "transmission",
   "name": "Transmission",
-  "webViewURL": "http://app.93million.transmission:9091"
+  "webViewURL": "http://app.rapptor.transmission:9091"
 }

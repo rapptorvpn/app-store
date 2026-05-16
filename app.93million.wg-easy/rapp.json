@@ -3,9 +3,9 @@
   "icon": {
     "backgroundColor": "#88171A"
   },
-  "id": "app.93million.wg-easy",
+  "id": "app.rapptor.wg-easy",
   "info": "wg-easy is the easiest way to run WireGuard VPN + Web-based Admin UI. WireGuard is a communication protocol and free and open-source software that implements encrypted virtual private networks, and was designed with the goals of ease of use, high speed performance, and low attack surface",
   "path": "wg-easy",
   "name": "WireGuard Easy VPN",
-  "webViewURL": "http://app.93million.wg-easy:51821"
+  "webViewURL": "http://app.rapptor.wg-easy:51821"
 }
